@@ -17,6 +17,29 @@ Once setup is complete, save these values to `docs/orchestration.config.json` un
 
 Exhaustively map user journeys and feature-level interactions (buttons, links, filters, dialogs, tabs, forms, menus, pagination, sort, etc.) and maintain state in the working directory.
 
+## Critical: Fresh Context Per Round
+
+**IMPORTANT: Each round must start with a clean mental state.**
+
+1. **At the start of each round**:
+   - Treat the orchestration as if you just woke up
+   - Read ONLY from disk state files (`orchestration-state.json`, frontiers, maps)
+   - Do NOT rely on accumulated chat context from previous rounds
+   - Re-establish the current state from files, not from memory
+
+2. **Do NOT assume**:
+   - What pages were visited in prior rounds
+   - What features were discovered previously
+   - What the current route coverage is
+
+3. **DO read from disk**:
+   - `orchestration-state.json` for current round number and progress
+   - Frontier files for pending work
+   - Map files for completed work
+   - Config file for target URL and auth
+
+4. **Why**: Accumulated context can cause hallucinations about what was discovered. Reading from disk ensures ground truth.
+
 ## Working Directory Structure
 
 ```
@@ -111,7 +134,10 @@ If the answer to ANY of these is "no", the round is incomplete.
 
 Repeat this loop until completion:
 
-### 1. Check Status
+### 1. Check Status (Fresh Context)
+
+**BEFORE STARTING EACH ROUND**: Read `orchestration-state.json` to ground yourself in the current state. Forget accumulated chat context.
+
 ```bash
 cd /path/to/ux-map
 npm run status
