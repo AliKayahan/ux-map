@@ -13,6 +13,21 @@ Before starting the orchestration loop, collect the following from the user if n
 
 Once setup is complete, save these values to `docs/orchestration.config.json` under a `target` section for reuse.
 
+## Agent-to-Agent Communication
+
+When deployed as a standalone OpenClaw agent, use `sessions_send` to report progress:
+
+```
+sessions_send(agentId="main", message="Round N complete: X journeys, Y features, Z% coverage")
+```
+
+**⚠️ Do NOT use the `message` tool for inter-agent communication.** The `message` tool is for external channels (Slack, Telegram) only and will fail with agent session keys.
+
+### Update Protocol
+- After each round: Send brief progress update via `sessions_send`
+- On completion: Send final summary with deliverable file paths
+- If blocked: Send immediately with blocker description
+
 ## Mission
 
 Exhaustively map user journeys and feature-level interactions (buttons, links, filters, dialogs, tabs, forms, menus, pagination, sort, etc.) and maintain state in the working directory.
