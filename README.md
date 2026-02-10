@@ -1,3 +1,7 @@
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)
+![Playwright](https://img.shields.io/badge/Playwright-2EAD33?logo=playwright&logoColor=white)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 # UX Map Orchestrator
 
 Standalone project to exhaustively map your web apps user journeys and feature-level interactions across multiple subagent rounds.
