@@ -13,21 +13,6 @@ Before starting the orchestration loop, collect the following from the user if n
 
 Once setup is complete, save these values to `docs/orchestration.config.json` under a `target` section for reuse.
 
-## Agent-to-Agent Communication
-
-When deployed as a standalone OpenClaw agent, use `sessions_send` to report progress:
-
-```
-sessions_send(agentId="main", message="Round N complete: X journeys, Y features, Z% coverage")
-```
-
-**⚠️ Do NOT use the `message` tool for inter-agent communication.** The `message` tool is for external channels (Slack, Telegram) only and will fail with agent session keys.
-
-### Update Protocol
-- After each round: Send brief progress update via `sessions_send`
-- On completion: Send final summary with deliverable file paths
-- If blocked: Send immediately with blocker description
-
 ## Mission
 
 Exhaustively map user journeys and feature-level interactions (buttons, links, filters, dialogs, tabs, forms, menus, pagination, sort, etc.) and maintain state in the working directory.
@@ -70,6 +55,57 @@ ux-map/
 5. **If a route/control is discovered**, add follow-up frontier items.
 6. **If outputs are missing** for a task, write a valid JSON output with empty `candidates` and a short `reason` field; do not skip files.
 7. **Prefer parallel workers** per round (up to configured limit), otherwise process sequentially.
+
+## Exhaustive Exploration Strategy (CRITICAL)
+
+**"Exhaustive" means click EVERYTHING to reveal hidden UI.**
+
+### Pattern for Every Page/State
+
+1. **Initial scan**: Identify all visible interactive elements
+2. **Systematic interaction**:
+   - Click **overflow menus** ("...", "⋮", "⋯") → document all revealed actions
+   - Click **dropdown triggers** (▼, chevrons, "Show more") → document all options
+   - Hover over **icons** → document tooltips and hover menus
+   - Click **tabs** → explore each tab panel
+   - Click **table row actions** → document row-level menus
+   - Click **card action buttons** → document card-level menus
+   - Open **modals/dialogs** → explore controls inside them
+   - Expand **collapsible sections** → document nested controls
+3. **Recursive exploration**: When clicking reveals new UI, explore THOSE elements too
+4. **Reset state**: Close menus/dialogs and move to next element
+5. **Repeat until every clickable element has been interacted with**
+
+### Common Hidden UI Patterns
+
+- **Table row menus**: "..." button in last column of tables
+- **Card overflow menus**: Icon button in card top-right corner
+- **Settings nested in profiles**: User dropdown → Settings (often has sub-navigation)
+- **Advanced filters**: "Advanced" toggle that reveals more filter options
+- **Bulk action menus**: Checkbox selection → "Actions" dropdown
+- **Status dropdowns**: Status badges that are actually dropdown triggers
+- **Inline edit modes**: Hover over text reveals edit button
+
+### Red Flags (Indicators You Missed Something)
+
+- Screenshots show "..." buttons but no documentation of what they reveal
+- Table rows documented but no row-level actions listed
+- Cards documented but no card-level actions listed
+- Profile/settings pages documented but no sub-navigation explored
+- Dropdown icons visible but options not enumerated
+- "Show more" / "View all" links not followed
+
+### Quality Check
+
+Before completing a round, ask:
+- Did I click every "..." menu I saw?
+- Did I open every dropdown?
+- Did I hover over every icon to check for tooltips?
+- Did I click every tab?
+- Did I explore inside every modal/dialog?
+- Did I check table rows AND card items for action menus?
+
+If the answer to ANY of these is "no", the round is incomplete.
 
 ## Orchestration Loop
 
