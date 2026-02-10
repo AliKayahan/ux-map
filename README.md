@@ -1,6 +1,6 @@
 # UX Map Orchestrator
 
-Standalone project to exhaustively map Procright user journeys and feature-level interactions across multiple subagent rounds.
+Standalone project to exhaustively map your web apps user journeys and feature-level interactions across multiple subagent rounds.
 
 ## What It Solves
 
