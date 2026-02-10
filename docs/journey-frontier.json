@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "seed-journey-admin-dashboard",
+      "mode": "discover_new",
+      "role": "admin",
+      "route": "/dashboard",
+      "state": "default",
+      "note": "Start from dashboard and discover first-level journeys.",
+      "priority": 1
+    },
+    {
+      "id": "seed-journey-manager-dashboard",
+      "mode": "discover_new",
+      "role": "manager",
+      "route": "/dashboard",
+      "state": "default",
+      "note": "Start from dashboard and discover manager-specific journeys.",
+      "priority": 1
+    }
+  ]
+}

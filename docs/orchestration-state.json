@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "round": 0,
+  "pendingRound": null,
+  "consecutiveNoFindings": 0,
+  "completed": false,
+  "lastRunAt": null,
+  "history": []
+}

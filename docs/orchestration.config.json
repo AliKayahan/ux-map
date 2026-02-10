@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "roles": [
+    "admin",
+    "manager",
+    "worker"
+  ],
+  "expectedRoutes": [],
+  "expectedFeatureUnits": [],
+  "targetRouteCoveragePct": 95,
+  "targetFeatureCoveragePct": 100,
+  "stagnationThreshold": 3,
+  "minimumConfidence": 0.6,
+  "maxWorkersPerRound": 6,
+  "defaultShardSize": 4
+}

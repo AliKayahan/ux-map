@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "seed-feature-admin-dashboard-filter",
+      "mode": "inventory",
+      "role": "admin",
+      "route": "/dashboard",
+      "state": "default",
+      "selector": "button[aria-label*='filter'], button:has-text('Filter')",
+      "action": "click",
+      "note": "Open filter popup and enumerate all interactive controls.",
+      "priority": 1
+    }
+  ]
+}

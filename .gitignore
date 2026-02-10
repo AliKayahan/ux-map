@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+*.log
+
+# Run artifacts
+/docs/agent-runs/*
+!/docs/agent-runs/.gitkeep

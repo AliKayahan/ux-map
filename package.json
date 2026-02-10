@@ -1,0 +1,14 @@
+{
+  "name": "ux-map",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Multi-round journey and feature coverage orchestrator for Procright UX mapping.",
+  "scripts": {
+    "init": "node scripts/journey-orchestrator.mjs init",
+    "prepare-round": "node scripts/journey-orchestrator.mjs prepare-round",
+    "merge-round": "node scripts/journey-orchestrator.mjs merge-round",
+    "status": "node scripts/journey-orchestrator.mjs status",
+    "help": "node scripts/journey-orchestrator.mjs help"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "lastUpdated": null,
+  "summary": {
+    "totalJourneys": 0,
+    "routesDiscovered": 0,
+    "routeCoveragePct": null,
+    "byRole": {}
+  },
+  "history": []
+}
